@@ -1,0 +1,33 @@
+<%if(indexRouter.modelCurrentUser.attributes.username==fromUser){%>
+<div class="container col-lg-12 col-md-12">
+	<div class="chatUserName pull-right">
+		<strong>Me</strong>
+	</div>
+	<br>
+	<div class=" pull-right wrapIt col-lg-12 col-md-12">
+	<p class="text-info my-chat-message"><%-message%></p>
+	</div>
+	<span class="pull-right text-muted chat-timestamp">
+	<%if(displayTime){%>
+		<span><%-displayTime%></span>
+	<%}%>
+	<span><%-date%> &nbsp; <%-time%></span>
+		<span class="glyphicon glyphicon-time"></span>
+	</span>
+</div>
+<%}else{%>
+<div class="container col-lg-12 col-md-12">
+	<div class="chatUserName pull-left">
+	<strong><%-indexRouter.toUser%></strong>
+	</div>
+	<br>
+	<div class=" pull-left wrapIt col-lg-12 col-md-12">
+		<p  class="text-danger chat-message"><%-message%></p>
+	</div>
+	<span class=" pull-left text-muted chat-timestamp">
+		<span class="glyphicon glyphicon-time"></span>
+		<span><%-date%> &nbsp; <%-time%></span>
+	</span>
+</div>
+<%}%>
+<hr class="col-lg-offset-5 col-md-offset-5" style="width:100px">

@@ -1,0 +1,65 @@
+a:hover {
+	color: red;
+}
+
+a:visited,a:link {
+	text-decoration: none;
+	outline: none;
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	/* Margin bottom by footer height */
+	width: 100vw;
+	margin-bottom: 60px;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 60px;
+	background-color: #f5f5f5;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+.text-muted {
+	margin: 20px 0;
+}
+
+code {
+	font-size: 80%;
+}
+
+/* Custom chat CSS
+-------------------------------------------------- */
+.chatUserList {
+	list-style: none;
+	padding: 0
+}
+
+.my-chat-message {
+	text-align: right;
+	margin: 0px
+}
+
+.chat-message {
+	text-align: left;
+	margin: 0px
+}
+
+.chat-timestamp {
+	font-size: 10px;
+	margin:5px;
+}
+.wrapIt {
+	word-wrap: break-word;
+}
