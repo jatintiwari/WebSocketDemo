@@ -8,6 +8,7 @@
 	<p class="text-info my-chat-message"><%-message%></p>
 	</div>
 	<span class="pull-right text-muted chat-timestamp">
+	<span class="<%-messageRead?'glyphicon glyphicon-ok text-success': 'glyphicon glyphicon-ok text-muted'%>"></span>
 	<%if(displayTime){%>
 		<span><%-displayTime%></span>
 	<%}%>

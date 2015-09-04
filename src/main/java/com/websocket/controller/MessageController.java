@@ -78,12 +78,16 @@ public class MessageController {
     	String currentUsername = principal.getName();
     	User user = userService.getUserByUserName(currentUsername);
     	if(!user.equals(null)){
-    		System.out.println("from  :: "+message.getFromUser()+"  to"+message.getToUser());
+    		Log.info("from  :: "+message.getFromUser()+"  to ::"+message.getToUser());
     		Long unReadMessages = messageService.getUnReadMessageCount(message.getFromUser(),message.getToUser());
-    		System.out.println("Count "+unReadMessages);
     		if(unReadMessages>0){
     			try{
+    				JSONObject jsonObject = new JSONObject();
+    				jsonObject.put("markRead", "TRUE");
+    				jsonObject.put("fromUser", message.getFromUser());
+    				jsonObject.put("toUser", message.getToUser());
     				messageService.markeMessagesAsRead(message.getFromUser(),message.getToUser());
+    				this.template.convertAndSendToUser(message.getFromUser(), "/websocket/message", jsonObject.toString());
     				Log.info("Messages marked as read");
     			}catch(Exception e){
     				e.printStackTrace();
@@ -120,6 +124,7 @@ public class MessageController {
   					jsonObject.put("message", message.getMessage());
   					jsonObject.put("time", TimeConversion.getCurrentTime());
   		    		jsonObject.put("date", TimeConversion.getCurrentDate());
+  		    		jsonObject.put("messageRead", message.isMessageRead());
   					jsonArray.put(jsonObject);
   				}
   				Log.info("Successfully retrieved the conversation between "+currentUsername+" and "+otherUser+" :: "+jsonArray.toString());

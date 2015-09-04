@@ -16,7 +16,7 @@ define(function(require){
 			displayTime:"",
 			date:"",
 			time:"",
-			read:"",
+			messageRead:false,
 		}
 	});
 	

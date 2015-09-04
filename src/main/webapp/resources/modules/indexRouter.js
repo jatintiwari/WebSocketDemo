@@ -44,6 +44,19 @@ define(function(require){
 					_this.stompClient.connect({}, function(frame)  {
 						_this.stompClient.subscribe('/user/websocket/message', function(greeting){
 							var newMessage = JSON.parse(greeting.body);
+							if(newMessage.markRead==="TRUE"){
+								if(indexRouter.modelUserChatList.at(0).attributes.fromUser == newMessage.fromUser 
+										|| indexRouter.modelUserChatList.at(0).attributes.toUser == newMessage.fromUser){
+									console.log("marking read");
+									var unReadMessageModel = indexRouter.modelUserChatList.where({messageRead:false});
+									console.log(unReadMessageModel);
+									_.each(unReadMessageModel,function(model){
+										console.log("marked read");
+										model.set("messageRead",true);
+									});
+								}
+								return;
+							}
 							console.log(JSON.stringify(newMessage));
 							if(indexRouter.modelUserChatList !=null || indexRouter.modelUserChatList!=undefined){
 								//match the first msg's fromUser or sentUser in the messages list with new msg the to update 
@@ -69,7 +82,7 @@ define(function(require){
 										indexRouter.modelUserChatList.add(newMessage);
 									}
 									indexRouter.stompClient.send("/messages/read", {}, JSON.stringify({ "fromUser": newMessage.fromUser,
-										"toUser": indexRouter.modelCurrentUser.username}));
+										"toUser": indexRouter.modelCurrentUser.attributes.username}));
 									//by sending a frame we can mark all the messages as read, sent to the current user from the other
 									//user in the current chat.
 								}
@@ -79,7 +92,6 @@ define(function(require){
 									console.log('here2');
 									var messageFrom = indexRouter.modelUsersList.findWhere({username:newMessage.fromUser});
 									messageFrom.set("unReadMessages",Number(messageFrom.get('unReadMessages'))+1);
-									indexRouter.viewUsersList.render();
 								}
 							}else{
 								//when user is not under messages tab and not chating with anyone. Just update messages tab
