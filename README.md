@@ -7,3 +7,7 @@ Rendering the real time updates, frame tranfers and notification using BackboneJ
 #Spring WebSockets
 StompJS: Proviced a sub-protocol for the tranfer of messages over WebSocket<br>
 SockJS: Provides transparent fall back mechanism to XHR Streaming, XHR polling for the browser who doesn't support websocket.
+
+#Requisite
+Run /src/main/resources/websocketsdemo.sql to export users.
+
